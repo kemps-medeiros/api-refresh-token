@@ -2,6 +2,7 @@
 
 
 ## Tecnologias Utilizadas
+- NodeJS
 - PostgreSQL
 - Express
 - Prisma
