@@ -31,14 +31,19 @@ class AuthenticateUserUseCase {
         }
 
         //gerar o token do usuario
-       
+
 
         const generateToken = new GenerateTokenProvider();
         const token = await generateToken.execute(userAlreadyExists.id)
 
+        await client.refreshToken.delete({
+            where: {
+                userId: userAlreadyExists.id,
+            }
+        })
 
         const generateRefreshToken = new GenerateRefreshToken();
-        const refreshToken = await generateRefreshToken.execute(userAlreadyExists.id); 
+        const refreshToken = await generateRefreshToken.execute(userAlreadyExists.id);
 
         return { token, refreshToken }
     }
